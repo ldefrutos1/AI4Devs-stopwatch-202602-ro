@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Temporizador profesional con cronómetro ascendente y cuenta atrás." />
+  <title>Temporizador profesional</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section class="timer-card" aria-labelledby="app-title">
+      <header class="card-header">
+        <div>
+          <p class="eyebrow">Utilidad de tiempo</p>
+          <h1 id="app-title">Temporizador y cuenta atrás</h1>
+          <p class="subtitle">Introduce el tiempo con el teclado numérico y controla el conteo con un solo clic.</p>
+        </div>
+        <div class="status-panel" aria-live="polite">
+          <span class="status-dot" id="statusDot"></span>
+          <span id="statusText">Listo para configurar</span>
+        </div>
+      </header>
+
+      <div class="display-group">
+        <label for="timeDisplay">Tiempo</label>
+        <input
+          id="timeDisplay"
+          class="time-display"
+          type="text"
+          value="00:00:00"
+          inputmode="numeric"
+          readonly
+          aria-describedby="inputHelp"
+        />
+        <p id="inputHelp" class="help-text">Escribe números desde el teclado para formar el tiempo con formato HH:MM:SS.</p>
+      </div>
+
+      <section class="controls" aria-label="Controles del temporizador">
+        <button id="setButton" class="action-button secondary" type="button">
+          <img src="assets/set.svg" alt="" aria-hidden="true" />
+          <span>Set</span>
+        </button>
+        <button id="clearButton" class="action-button ghost" type="button">
+          <img src="assets/clear.svg" alt="" aria-hidden="true" />
+          <span>Limpiar</span>
+        </button>
+        <button id="countdownButton" class="action-button danger" type="button">
+          <img src="assets/countdown.svg" alt="" aria-hidden="true" />
+          <span>Cuenta atrás</span>
+        </button>
+        <button id="startButton" class="action-button primary" type="button">
+          <img src="assets/start.svg" alt="" aria-hidden="true" />
+          <span>Inicio</span>
+        </button>
+      </section>
+
+      <section class="notes" aria-label="Indicaciones de uso">
+        <article>
+          <h2>Modo ascendente</h2>
+          <p>El tiempo configurado actúa como objetivo. Al pulsar <strong>Inicio</strong>, el contador parte de 00:00:00 y sube segundo a segundo hasta alcanzarlo.</p>
+        </article>
+        <article>
+          <h2>Modo cuenta atrás</h2>
+          <p>Al pulsar <strong>Cuenta atrás</strong>, el valor mostrado se va descontando correctamente hasta llegar a 00:00:00.</p>
+        </article>
+      </section>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="assertive" aria-atomic="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

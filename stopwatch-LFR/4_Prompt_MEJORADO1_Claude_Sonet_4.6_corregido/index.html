@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cronómetro profesional con cuenta ascendente y cuenta atrás." />
+  <title>Cronómetro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app" role="main">
+
+    <header class="app__header">
+      <div class="app__brand">
+        <svg class="app__logo" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="16" cy="16" r="1.8" fill="currentColor"/>
+          <line x1="16" y1="16" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="16" y1="16" x2="22" y2="16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="16" y1="4" x2="16" y2="2.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="22.5" y1="6.5" x2="23.6" y2="5.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <h1 class="app__title">Cronómetro</h1>
+      </div>
+      <div class="app__status" aria-live="polite" aria-atomic="true">
+        <span class="status-dot" id="statusDot" aria-hidden="true"></span>
+        <span class="status-label" id="statusLabel">Listo</span>
+      </div>
+    </header>
+
+    <section class="timer-section" aria-label="Display del temporizador">
+      <div class="display-wrap">
+        <label class="display-label" for="timeDisplay">Tiempo</label>
+        <input
+          id="timeDisplay"
+          class="display-input"
+          type="text"
+          value="00:00:00"
+          readonly
+          inputmode="numeric"
+          aria-label="Tiempo en formato horas, minutos y segundos"
+          aria-describedby="hint"
+          aria-live="off"
+        />
+        <div class="display-track" aria-hidden="true">
+          <span class="display-track__fill" id="progressFill"></span>
+        </div>
+      </div>
+      <p id="hint" class="hint" aria-live="polite">
+        Pulsa teclas numéricas para introducir el tiempo
+      </p>
+    </section>
+
+    <section class="controls" aria-label="Controles del cronómetro">
+
+      <div class="controls__row">
+        <button id="btnSet" class="btn btn--set" type="button"
+          title="Fijar el tiempo mostrado como objetivo"
+          aria-describedby="hint">
+          <span class="btn__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a5 5 0 0 1 5 5c0 3.5-5 11-5 11S7 10.5 7 7a5 5 0 0 1 5-5z"/>
+              <circle cx="12" cy="7" r="1.8" fill="currentColor" stroke="none"/>
+            </svg>
+          </span>
+          <span>Set</span>
+        </button>
+
+        <button id="btnClear" class="btn btn--clear" type="button"
+          title="Limpiar y volver a 00:00:00">
+          <span class="btn__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 6h18"/>
+              <path d="M8 6V4h8v2"/>
+              <path d="M19 6l-1 14H6L5 6"/>
+              <path d="M10 11v6M14 11v6"/>
+            </svg>
+          </span>
+          <span>Limpiar</span>
+        </button>
+      </div>
+
+      <div class="controls__row">
+        <button id="btnStart" class="btn btn--start" type="button"
+          title="Iniciar cronómetro ascendente desde 00:00:00">
+          <span class="btn__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <path d="M8 5.14v14l11-7-11-7z"/>
+            </svg>
+          </span>
+          <span>Inicio</span>
+        </button>
+
+        <button id="btnCountdown" class="btn btn--countdown" type="button"
+          title="Iniciar cuenta atrás desde el tiempo fijado">
+          <span class="btn__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 22h14M5 2h14"/>
+              <path d="M17 22v-4.17a2 2 0 0 0-.59-1.42L12 12l-4.41 4.41A2 2 0 0 0 7 17.83V22"/>
+              <path d="M7 2v4.17a2 2 0 0 0 .59 1.42L12 12l4.41-4.41A2 2 0 0 0 17 6.17V2"/>
+            </svg>
+          </span>
+          <span>Cuenta atrás</span>
+        </button>
+      </div>
+
+      <div class="controls__row controls__row--single" id="stopRow" hidden>
+        <button id="btnStop" class="btn btn--stop" type="button"
+          title="Detener el cronómetro">
+          <span class="btn__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <rect x="5" y="5" width="14" height="14" rx="2"/>
+            </svg>
+          </span>
+          <span>Detener</span>
+        </button>
+      </div>
+
+    </section>
+
+    <div
+      id="toastRegion"
+      class="toast-region"
+      role="status"
+      aria-live="assertive"
+      aria-atomic="true"
+    ></div>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

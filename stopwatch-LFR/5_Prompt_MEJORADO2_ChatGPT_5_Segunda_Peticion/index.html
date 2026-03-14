@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Cronómetro minimalista con tiempo objetivo, cuenta ascendente y cuenta atrás."
+  />
+  <title>Cronómetro Minimalista</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section class="timer-card" aria-labelledby="appTitle">
+      <header class="card-header">
+        <h1 id="appTitle">Cronómetro</h1>
+        <div class="status" aria-live="polite" aria-atomic="true">
+          <span id="statusDot" class="status__dot" aria-hidden="true"></span>
+          <span id="statusLabel" class="status__label">listo</span>
+        </div>
+      </header>
+
+      <div class="display-group">
+        <label for="timeDisplay" class="display-label">Tiempo</label>
+        <input
+          id="timeDisplay"
+          class="display-input display-input--ready"
+          type="text"
+          inputmode="numeric"
+          value="00:00:00"
+          readonly
+          aria-describedby="hint"
+          aria-label="Tiempo en formato horas minutos segundos"
+        />
+        <p id="hint" class="hint">
+          Introduce 6 dígitos con el teclado numérico antes de pulsar Set.
+        </p>
+      </div>
+
+      <div class="progress" aria-hidden="true">
+        <div id="progressFill" class="progress__fill"></div>
+      </div>
+
+      <div class="actions" aria-label="Controles del cronómetro">
+        <button type="button" class="btn btn--primary" data-action="set">
+          <span class="btn__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M7 4h10v2H7zM12 8a7 7 0 1 1 0 14a7 7 0 0 1 0-14zm0 2a1 1 0 0 0-1 1v3.586l2.707 2.707l1.414-1.414L13 13.757V11a1 1 0 0 0-1-1z"/>
+            </svg>
+          </span>
+          <span>Set</span>
+        </button>
+
+        <button type="button" class="btn" data-action="clear">
+          <span class="btn__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M6 7h12l-1 13H7L6 7zm3-3h6l1 2H8l1-2zM9 10h2v7H9zm4 0h2v7h-2z"/>
+            </svg>
+          </span>
+          <span>Limpiar</span>
+        </button>
+
+        <button type="button" class="btn" data-action="start">
+          <span class="btn__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </span>
+          <span>Inicio</span>
+        </button>
+
+        <button type="button" class="btn" data-action="countdown">
+          <span class="btn__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M12 2a10 10 0 1 0 10 10A10.012 10.012 0 0 0 12 2zm1 5v4.586l2.707 2.707l-1.414 1.414L11 12.414V7z"/>
+            </svg>
+          </span>
+          <span>Cuenta atrás</span>
+        </button>
+      </div>
+
+      <div id="stopRow" class="stop-row" hidden>
+        <button type="button" class="btn btn--danger btn--full" data-action="stop">
+          <span class="btn__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M7 7h10v10H7z"/>
+            </svg>
+          </span>
+          <span>Stop</span>
+        </button>
+      </div>
+    </section>
+
+    <div
+      id="toastRegion"
+      class="toast-region"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

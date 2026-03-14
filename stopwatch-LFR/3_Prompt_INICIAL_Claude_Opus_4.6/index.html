@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cronómetro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <h1 class="title">Cronómetro</h1>
+
+    <div class="timer-display">
+      <input id="tiempo" type="text" value="00:00:00" readonly />
+    </div>
+
+    <p id="hint" class="hint">Pulsa teclas numéricas para introducir el tiempo</p>
+
+    <div id="mensaje" class="mensaje hidden"></div>
+
+    <div class="controls">
+      <button id="btnSet" class="btn btn-set" title="Fijar tiempo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        Set
+      </button>
+      <button id="btnLimpiar" class="btn btn-limpiar" title="Limpiar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="1 4 1 10 7 10"/>
+          <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+        </svg>
+        Limpiar
+      </button>
+    </div>
+
+    <div class="controls">
+      <button id="btnInicio" class="btn btn-inicio" title="Inicio (ascendente)">
+        <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+          <polygon points="6,4 20,12 6,20"/>
+        </svg>
+        Inicio
+      </button>
+      <button id="btnCuentaAtras" class="btn btn-cuenta" title="Cuenta atrás">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 8 14"/>
+        </svg>
+        Cuenta atrás
+      </button>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

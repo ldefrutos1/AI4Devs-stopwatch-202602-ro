@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cronómetro Profesional</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Toast container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <div class="app-wrapper">
+
+    <!-- Header -->
+    <header class="app-header">
+      <p class="app-title">Cronómetro</p>
+      <p class="app-subtitle">Precision Timer v1.0</p>
+    </header>
+
+    <!-- Main card -->
+    <main class="card">
+
+      <!-- Time Display -->
+      <div class="time-display-wrapper">
+        <label class="time-label" for="timeDisplay">Tiempo</label>
+        <input
+          id="timeDisplay"
+          class="time-display"
+          type="text"
+          readonly
+          value="00:00:00"
+          autocomplete="off"
+          spellcheck="false"
+          aria-label="Campo de tiempo en formato horas, minutos y segundos"
+        />
+        <!-- Mode indicator -->
+        <div class="mode-indicator">
+          <span class="mode-dot" id="modeDot"></span>
+          <span class="mode-text" id="modeText"></span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Buttons -->
+      <div class="btn-grid">
+
+        <!-- Row 1: Set + Limpiar -->
+        <div class="btn-row">
+
+          <button id="btnSet" class="btn btn-secondary" title="Fijar el tiempo actual como referencia">
+            <span class="btn-icon">
+              <!-- Set icon: pin/anchor -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="17" x2="12" y2="22"/>
+                <path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/>
+              </svg>
+            </span>
+            Set
+          </button>
+
+          <button id="btnClear" class="btn btn-ghost" title="Limpiar y volver a 00:00:00">
+            <span class="btn-icon">
+              <!-- Clear icon: reset arrow -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                <path d="M3 3v5h5"/>
+              </svg>
+            </span>
+            Limpiar
+          </button>
+
+        </div>
+
+        <!-- Row 2: Inicio + Cuenta Atrás -->
+        <div class="btn-row">
+
+          <button id="btnStart" class="btn btn-primary" title="Iniciar cronómetro ascendente desde 00:00:00">
+            <span class="btn-icon">
+              <!-- Start icon: play circle -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/>
+              </svg>
+            </span>
+            Inicio
+          </button>
+
+          <button id="btnCountdown" class="btn btn-danger" title="Iniciar cuenta atrás desde el tiempo establecido">
+            <span class="btn-icon">
+              <!-- Countdown icon: hourglass / timer down -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 22h14"/>
+                <path d="M5 2h14"/>
+                <path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/>
+                <path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/>
+              </svg>
+            </span>
+            Cuenta&nbsp;atrás
+          </button>
+
+        </div>
+
+        <!-- Row 3: Stop (hidden by default) -->
+        <div class="btn-row single">
+          <button id="btnStop" class="btn btn-stop" title="Detener el cronómetro">
+            <span class="btn-icon">
+              <!-- Stop icon: square -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="3" ry="3"/>
+                <rect x="8" y="8" width="8" height="8" rx="1" ry="1" fill="currentColor" stroke="none"/>
+              </svg>
+            </span>
+            Detener
+          </button>
+        </div>
+
+      </div><!-- /.btn-grid -->
+
+      <!-- Keyboard hint -->
+      <div class="keyboard-hint">
+        <span class="hint-text">Introduce el tiempo con el</span>
+        <span class="kbd">0–9</span>
+        <span class="hint-text">del teclado</span>
+      </div>
+
+    </main><!-- /.card -->
+
+  </div><!-- /.app-wrapper -->
+
+  <script src="script.js"></script>
+</body>
+</html>

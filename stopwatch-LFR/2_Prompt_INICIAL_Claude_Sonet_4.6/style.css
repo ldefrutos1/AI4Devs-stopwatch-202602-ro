@@ -1,0 +1,438 @@
+/* ============================================
+   CRONÓMETRO PROFESIONAL — style.css
+   Aesthetic: Industrial-Precision / Dark Luxury
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap');
+
+/* ─── Variables ─────────────────────────────── */
+:root {
+  --bg-base:        #0b0c0f;
+  --bg-card:        #111318;
+  --bg-elevated:    #181b22;
+  --border:         #252830;
+  --border-light:   #2f3340;
+
+  --accent:         #c9a84c;
+  --accent-dim:     #8a6e2f;
+  --accent-glow:    rgba(201, 168, 76, 0.18);
+
+  --text-primary:   #e8eaf0;
+  --text-secondary: #7a8090;
+  --text-muted:     #3e424f;
+
+  --red:            #d94f4f;
+  --red-dim:        rgba(217, 79, 79, 0.15);
+  --green:          #3ecf7a;
+  --green-dim:      rgba(62, 207, 122, 0.12);
+  --blue:           #4f9bd9;
+
+  --font-display: 'Share Tech Mono', monospace;
+  --font-ui:      'Rajdhani', sans-serif;
+
+  --radius:   10px;
+  --radius-lg: 18px;
+  --shadow:   0 4px 32px rgba(0, 0, 0, 0.6);
+  --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.4);
+  --transition: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Reset & Base ──────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; }
+
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ─── Background texture ────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201, 168, 76, 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 80% 90%, rgba(79, 155, 217, 0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── App Container ─────────────────────────── */
+.app-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  padding: 24px 20px;
+}
+
+/* ─── Header ────────────────────────────────── */
+.app-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.app-title {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.app-subtitle {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* ─── Main Card ─────────────────────────────── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px 32px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-dim), transparent);
+}
+
+/* ─── Time Display ──────────────────────────── */
+.time-display-wrapper {
+  margin-bottom: 28px;
+  position: relative;
+}
+
+.time-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.time-display {
+  display: block;
+  width: 100%;
+  background: var(--bg-base);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  font-family: var(--font-display);
+  font-size: 52px;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  text-align: center;
+  cursor: default;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition), color var(--transition);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.time-display.editable {
+  border-color: var(--accent-dim);
+  box-shadow: 0 0 0 3px var(--accent-glow), inset 0 2px 8px rgba(0,0,0,0.3);
+  color: var(--accent);
+}
+
+.time-display.running-up {
+  color: var(--green);
+  border-color: rgba(62, 207, 122, 0.3);
+  box-shadow: 0 0 0 2px var(--green-dim);
+  text-shadow: 0 0 24px rgba(62, 207, 122, 0.25);
+}
+
+.time-display.running-down {
+  color: var(--red);
+  border-color: rgba(217, 79, 79, 0.3);
+  box-shadow: 0 0 0 2px var(--red-dim);
+  text-shadow: 0 0 24px rgba(217, 79, 79, 0.25);
+}
+
+.time-display.finished {
+  animation: pulse-finish 0.8s ease-in-out 3;
+}
+
+@keyframes pulse-finish {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* Mode indicator dot */
+.mode-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  height: 16px;
+}
+
+.mode-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  transition: background var(--transition), box-shadow var(--transition);
+}
+
+.mode-dot.active-up   { background: var(--green);  box-shadow: 0 0 8px var(--green); }
+.mode-dot.active-down { background: var(--red);    box-shadow: 0 0 8px var(--red); }
+.mode-dot.active-edit { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+
+.mode-text {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color var(--transition);
+}
+
+.mode-text.active { color: var(--text-secondary); }
+
+/* ─── Separator ─────────────────────────────── */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+  margin: 24px 0;
+}
+
+/* ─── Button Grid ───────────────────────────── */
+.btn-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.btn-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.btn-row.single { grid-template-columns: 1fr; }
+
+/* ─── Buttons ───────────────────────────────── */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0);
+  transition: background var(--transition);
+}
+
+.btn:hover::after { background: rgba(255,255,255,0.04); }
+.btn:active::after { background: rgba(255,255,255,0.08); }
+
+.btn:active { transform: scale(0.97); }
+
+.btn-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-icon img, .btn-icon svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Variant: Primary (gold) */
+.btn-primary {
+  background: linear-gradient(135deg, #c9a84c 0%, #a8873a 100%);
+  border-color: #c9a84c;
+  color: #0b0c0f;
+  box-shadow: 0 2px 12px rgba(201, 168, 76, 0.25);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 4px 20px rgba(201, 168, 76, 0.4);
+  border-color: #e0be6a;
+}
+
+/* Variant: Danger (countdown) */
+.btn-danger {
+  background: linear-gradient(135deg, #8b2020 0%, #6b1919 100%);
+  border-color: #a83030;
+  color: #f0d0d0;
+  box-shadow: 0 2px 12px rgba(217, 79, 79, 0.2);
+}
+
+.btn-danger:hover {
+  background: linear-gradient(135deg, #a83030 0%, #8b2020 100%);
+  box-shadow: 0 4px 20px rgba(217, 79, 79, 0.35);
+}
+
+/* Variant: Secondary (set) */
+.btn-secondary {
+  background: var(--bg-elevated);
+  border-color: var(--border-light);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent-dim);
+  color: var(--accent);
+}
+
+/* Variant: Ghost (clear) */
+.btn-ghost {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+.btn-ghost:hover {
+  border-color: var(--border-light);
+  color: var(--text-primary);
+}
+
+/* ─── Stop Button (shown during run) ────────── */
+.btn-stop {
+  background: var(--bg-elevated);
+  border-color: var(--border-light);
+  color: var(--text-secondary);
+}
+
+.btn-stop:hover {
+  border-color: #a83030;
+  color: var(--red);
+}
+
+/* ─── Keyboard hint ─────────────────────────── */
+.keyboard-hint {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 7px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-light);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  font-family: var(--font-display);
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+
+.hint-text {
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+/* ─── Toast notification ────────────────────── */
+.toast-container {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  pointer-events: none;
+}
+
+.toast {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 14px 24px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  box-shadow: var(--shadow);
+  white-space: nowrap;
+  animation: toast-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+             toast-out 0.3s ease-in var(--toast-duration, 2.7s) forwards;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toast-icon { font-size: 16px; }
+
+.toast.toast-success { border-color: rgba(62, 207, 122, 0.4); color: var(--green); }
+.toast.toast-warning { border-color: rgba(217, 79, 79, 0.4); color: var(--red); }
+.toast.toast-info    { border-color: rgba(201, 168, 76, 0.4); color: var(--accent); }
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(-12px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes toast-out {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(-8px) scale(0.97); }
+}
+
+/* ─── Responsive ────────────────────────────── */
+@media (max-width: 500px) {
+  .card { padding: 28px 20px 24px; }
+  .time-display { font-size: 40px; padding: 16px 18px; }
+  .btn { font-size: 12px; padding: 12px 16px; }
+}
